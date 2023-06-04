@@ -18,8 +18,21 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    // aliases settings
+    "baseUrl": ".",
+
+    "paths": {
+      /* Application aliases */
+      "@entities/*": [ "src/entities/*" ],
+      "@features/*": [ "src/features/*" ],
+      "@widgets/*": [ "src/widgets/*" ],
+      "@app/*": [ "src/app/*" ],
+      "@shared/*": [ "src/shared/*" ],
+    },
   },
+  
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
