@@ -13,7 +13,6 @@
 		position: sticky;
 		top: 0;
 		width: 100%;
-		height: min(8.5rem);
 		box-shadow: 0rem 1rem 1rem 0px #444;
 	}
 }

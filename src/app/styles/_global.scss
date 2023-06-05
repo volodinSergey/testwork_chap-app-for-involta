@@ -3,9 +3,9 @@
 *::after {
     margin: 0;
     padding: 0;
-    border: none;
     box-sizing: border-box;
     font-family: sans-serif;
+    border: none;
 }
 
 html,
@@ -14,10 +14,5 @@ body {
 }
 
 #app {
-    display: grid;
-    place-items: center;
     min-height: 100vh;
-    @media (max-width: 768px) {
-        display: block;
-    }
 }
