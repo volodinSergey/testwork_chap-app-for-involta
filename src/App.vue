@@ -1,5 +1,26 @@
 <script setup lang="ts">
 import Navbar from '@widgets/Navbar.widget.vue'
+
+const messages: string[] = [
+	'Сообщение 1',
+	'Сообщение 2',
+	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное',
+	'Сообщение 1',
+	'Сообщение 2',
+	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное',
+	'Сообщение 1',
+	'Сообщение 2 fregrgrgrgrg',
+	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное',
+	'Сообщение 1',
+	'Сообщение 2',
+	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное',
+	'Сообщение 1',
+	'Сообщение 2',
+	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное',
+	'Сообщение 1',
+	'Сообщение 2',
+	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное'
+]
 </script>
 
 <template>
@@ -11,11 +32,11 @@ import Navbar from '@widgets/Navbar.widget.vue'
 				<ul class="messages-list">
 					<li
 						class="message"
-						v-for="index in 100"
+						v-for="(message, index) in messages"
 						:key="index"
 						:class="{ 'my-message': index % 2 === 0 }"
 					>
-						{{ index }}
+						{{ message }}
 					</li>
 				</ul>
 			</div>
@@ -45,7 +66,7 @@ import Navbar from '@widgets/Navbar.widget.vue'
 
 	@media (max-width: 48rem) {
 		grid-template-columns: 1fr;
-		grid-template-rows: min(5.5rem) 1fr;
+		grid-template-rows: auto 1fr;
 	}
 }
 
@@ -59,14 +80,14 @@ import Navbar from '@widgets/Navbar.widget.vue'
 	background-color: #555;
 
 	@media (max-width: 768px) {
-		height: 20px;
+		height: 1.25rem;
 	}
 }
 
 .messages-container__top,
 .messages-container__bottom {
 	margin: 0 auto;
-	width: 43.75rem;
+	width: 100%;
 	max-width: 43.75rem;
 
 	@media (max-width: 57.8125rem) {
@@ -90,6 +111,7 @@ import Navbar from '@widgets/Navbar.widget.vue'
 .messages-list {
 	display: grid;
 	gap: 0.625rem;
+	padding: 0 0.9375rem;
 }
 
 .message {
@@ -97,14 +119,14 @@ import Navbar from '@widgets/Navbar.widget.vue'
 	padding: 5px;
 	border-radius: 1.25rem;
 	background-color: rgb(20, 11, 66);
+	min-width: min-content;
 	max-width: 60%;
-	width: 60%;
 	padding: 0.625rem;
 }
 
 .my-message {
-	background-color: #380b0b;
 	justify-self: end;
+	background-color: #380b0b;
 }
 
 .add-message-form {
