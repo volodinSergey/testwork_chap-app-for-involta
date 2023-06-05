@@ -1,7 +1,7 @@
 import { computed, onMounted, ref } from 'vue'
 
 import { TFailureResponse, TMessage } from '../repository/chat.repository.interface'
-
+import { sleep } from '@shared/utils/sleep.util'
 import { IUseMessagesComposable } from './useMessages.composable.interface'
 
 import { chatService } from '../service/chat.service'
@@ -14,8 +14,9 @@ export const useMessages = () => {
 	const isFailResponseExists = computed(() => failResponse.value.length > 0)
 
 	const fetchMessages = async (offset: number = 0) => {
-		failResponse.value
 		isLoading.value = true
+
+		await sleep(1000)
 
 		const result = await chatService.getMessages(offset)
 
@@ -29,7 +30,9 @@ export const useMessages = () => {
 		isLoading.value = false
 	}
 
-	onMounted(async () => await fetchMessages())
+	onMounted(async () => {
+		await fetchMessages()
+	})
 
 	return {
 		messages,

@@ -11,7 +11,7 @@
 	border: 10px solid black;
 	border-radius: 50%;
 	border-top-color: red;
-	animation: loading infinite 1s linear;
+	animation: loading infinite .5s linear;
 
 	@keyframes loading {
 		100% {

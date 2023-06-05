@@ -12,12 +12,10 @@ let offset = 20
 
 const handleScroll = async () => {
 	if (messagesList.value && messagesList.value.scrollTop === 0) {
-		try {
-			console.log(offset)
 			await fetchMessages(offset)
 
 			offset += 20
-		} catch {}
+	
 	}
 }
 </script>
@@ -40,7 +38,7 @@ const handleScroll = async () => {
 				</h1>
 
 				<ul class="messages-list">
-					<Loader v-if="isLoading"/>
+					<Loader v-if="isLoading" />
 
 					<li
 						class="message"
