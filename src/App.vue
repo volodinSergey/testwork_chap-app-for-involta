@@ -41,7 +41,7 @@ const handleScroll = async () => {
 
 				<ul class="messages-list">
 					<Loader v-if="isLoading"/>
-					
+
 					<li
 						class="message"
 						v-for="(message, index) in messages"
@@ -150,19 +150,5 @@ const handleScroll = async () => {
 	border: 1px solid black;
 	padding: 0.625rem;
 	border-radius: 0.625rem;
-}
-
-.loader {
-	width: 30px;
-	height: 30px;
-	background-color: tomato;
-	animation: loading 1s infinite linear;
-	text-align: center;
-}
-
-@keyframes loading {
-	100% {
-		rotate: 360deg;
-	}
 }
 </style>
