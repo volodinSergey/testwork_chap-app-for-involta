@@ -6,6 +6,8 @@
     box-sizing: border-box;
     font-family: sans-serif;
     border: none;
+    scroll-behavior: smooth;
+    transition: .3s;
 }
 
 html,

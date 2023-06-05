@@ -1,26 +1,24 @@
 <script setup lang="ts">
 import Navbar from '@widgets/Navbar.widget.vue'
 
-const messages: string[] = [
-	'Сообщение 1',
-	'Сообщение 2',
-	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное',
-	'Сообщение 1',
-	'Сообщение 2',
-	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное',
-	'Сообщение 1',
-	'Сообщение 2 fregrgrgrgrg',
-	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное',
-	'Сообщение 1',
-	'Сообщение 2',
-	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное',
-	'Сообщение 1',
-	'Сообщение 2',
-	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное',
-	'Сообщение 1',
-	'Сообщение 2',
-	'Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное Сообщение 1 длинное'
-]
+import { useMessages } from './enitities/chat/composables/useMessages.composable'
+import { ref } from 'vue'
+const { messages, isLoading, failResponse, isFailResponseExists, fetchMessages } = useMessages()
+
+const messagesList = ref<HTMLElement | undefined>()
+
+let offset = 20
+
+const handleScroll = async () => {
+	if (messagesList.value && messagesList.value.scrollTop === 0) {
+		try {
+			console.log(offset)
+			await fetchMessages(offset)
+
+			offset += 20
+		} catch {}
+	}
+}
 </script>
 
 <template>
@@ -28,8 +26,23 @@ const messages: string[] = [
 		<Navbar />
 
 		<div class="chat__messages-container messages-container">
-			<div class="messages-container__top">
+			<div
+				class="messages-container__top"
+				ref="messagesList"
+				@scroll="handleScroll"
+			>
+				<h1
+					class="fail"
+					v-if="isFailResponseExists"
+				>
+					{{ failResponse }}
+				</h1>
+
 				<ul class="messages-list">
+					<h1
+						class="loader"
+						v-if="isLoading"
+					></h1>
 					<li
 						class="message"
 						v-for="(message, index) in messages"
@@ -111,17 +124,20 @@ const messages: string[] = [
 .messages-list {
 	display: grid;
 	gap: 0.625rem;
-	padding: 0 0.9375rem;
+	padding: 1.9375rem 0.625rem;
 }
 
 .message {
 	color: #fff;
 	padding: 5px;
-	border-radius: 1.25rem;
+	border-radius: .7rem;
 	background-color: rgb(20, 11, 66);
 	min-width: min-content;
 	max-width: 60%;
 	padding: 0.625rem;
+}
+
+@keyframes message-animation {
 }
 
 .my-message {
@@ -135,12 +151,19 @@ const messages: string[] = [
 	border: 1px solid black;
 	padding: 0.625rem;
 	border-radius: 0.625rem;
-	/* 
-	@media (max-width: 768px) {
-		position: fixed;
-		left: 0;
-		bottom: 0;
-		width: 100%;
-	} */
+}
+
+.loader {
+	width: 30px;
+	height: 30px;
+	background-color: tomato;
+	animation: loading 1s infinite linear;
+	text-align: center;
+}
+
+@keyframes loading {
+	100% {
+		rotate: 360deg;
+	}
 }
 </style>

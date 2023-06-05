@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 import { TFailureResponse, TMessage } from '../repository/chat.repository.interface'
 
@@ -6,27 +6,36 @@ import { IUseMessagesComposable } from './useMessages.composable.interface'
 
 import { chatService } from '../service/chat.service'
 
-
-export const useMessages = ():IUseMessagesComposable => {
+export const useMessages = () => {
 	const messages = ref<TMessage[]>([])
-	const isMessagesLoading = ref<boolean>(true)
+	const isLoading = ref<boolean>(true)
 	const failResponse = ref<TFailureResponse>('')
 
-	onMounted(async () => {
-		const result = await chatService.getMessages()
+	const isFailResponseExists = computed(() => failResponse.value.length > 0)
+
+	const fetchMessages = async (offset: number = 0) => {
+		failResponse.value
+		isLoading.value = true
+
+		const result = await chatService.getMessages(offset)
 
 		if (typeof result === 'string') {
 			failResponse.value = result
 		} else {
-			messages.value = result.result
+			console.log(result)
+			messages.value = [...result.result.reverse(), ...messages.value]
 		}
 
-		isMessagesLoading.value = false
-	})
+		isLoading.value = false
+	}
+
+	onMounted(async () => await fetchMessages())
 
 	return {
 		messages,
-		isMessagesLoading,
-		failResponse
+		isLoading,
+		failResponse,
+		isFailResponseExists,
+		fetchMessages
 	}
 }
