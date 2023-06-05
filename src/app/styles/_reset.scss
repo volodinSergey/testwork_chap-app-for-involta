@@ -1,0 +1,23 @@
+button,
+a,
+select,
+option {
+    cursor: pointer;
+}
+
+button {
+    background-color: transparent;
+}
+
+img {
+    object-fit: cover;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+li {
+    list-style: none;
+}
