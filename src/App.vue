@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Navbar from '@widgets/Navbar.widget.vue'
+import Loader from '@shared/ui/Loader.ui.vue'
 
 import { useMessages } from './enitities/chat/composables/useMessages.composable'
 import { ref } from 'vue'
@@ -39,10 +40,8 @@ const handleScroll = async () => {
 				</h1>
 
 				<ul class="messages-list">
-					<h1
-						class="loader"
-						v-if="isLoading"
-					></h1>
+					<Loader v-if="isLoading"/>
+					
 					<li
 						class="message"
 						v-for="(message, index) in messages"
@@ -130,7 +129,7 @@ const handleScroll = async () => {
 .message {
 	color: #fff;
 	padding: 5px;
-	border-radius: .7rem;
+	border-radius: 0.7rem;
 	background-color: rgb(20, 11, 66);
 	min-width: min-content;
 	max-width: 60%;
