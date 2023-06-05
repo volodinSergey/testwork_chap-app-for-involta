@@ -1,11 +1,8 @@
 <script setup lang="ts">
-const f = (e: number) => e
-
-f(1)
 </script>
 
 <template>
-	<div>Привет, я текст:</div>
+	<h1>Example text</h1>
 </template>
 
 <style scoped></style>
