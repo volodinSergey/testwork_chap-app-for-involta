@@ -1,0 +1,22 @@
+<template>
+	<div class="loader"></div>
+</template>
+
+<style scoped lang="scss">
+.loader {
+	position: relative;
+	width: 3.5rem;
+	aspect-ratio: 1;
+	font-size: 1.875rem;
+	border: 0.5rem solid black;
+	border-radius: 50%;
+	border-top-color: red;
+	animation: loading infinite .3s linear;
+
+	@keyframes loading {
+		100% {
+			rotate: 360deg;
+		}
+	}
+}
+</style>

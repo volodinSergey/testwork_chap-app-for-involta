@@ -1,6 +1,6 @@
 import { Ref } from 'vue'
 
-import { TFailureResponse, TMessage } from '../repository/chat.repository.interface'
+import { TFailureResponse, TMessage } from '@entities/chat/repository/chat.repository.interface'
 
 export interface IUseMessagesComposable {
 	messages: Ref<TMessage[]>

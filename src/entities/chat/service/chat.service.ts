@@ -1,5 +1,5 @@
-import { IChatRepository, ISuccessResponse, TFailureResponse } from '../repository/chat.repository.interface'
-import { ChatRespository } from '../repository/chat.repository'
+import { IChatRepository, ISuccessResponse, TFailureResponse } from '@entities/chat/repository/chat.repository.interface'
+import { ChatRespository } from '@entities/chat/repository/chat.repository'
 
 class ChatService {
 	#chatRepository: IChatRepository
