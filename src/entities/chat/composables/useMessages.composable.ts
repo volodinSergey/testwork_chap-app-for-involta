@@ -1,10 +1,9 @@
 import { ref, onMounted } from 'vue'
 
-import { TMessage } from '../repository/chat.repository.interface'
-
 import { sleep } from '@shared/utils/sleep.util'
 
-import { chatService } from '../service/chat.service'
+import { chatService } from '@entities/chat/service/chat.service'
+import { TMessage } from '@entities/chat/repository/chat.repository.interface'
 
 export const useMessages = () => {
 	const messagesContainer = ref<HTMLElement | undefined>()
@@ -75,7 +74,6 @@ export const useMessages = () => {
 		isLoading.value = false
 
 		messagesContainer.value?.addEventListener('scroll', handleMessagesScroll)
-		console.log(messagesContainer.value)
 	})
 
 	return {

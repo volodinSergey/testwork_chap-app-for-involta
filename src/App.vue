@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { ref, nextTick } from 'vue'
 
-import Navbar from '@widgets/Navbar.widget.vue'
-import SendMessage from '@features/SendMessage.feature.vue'
-import Loader from '@shared/ui/Loader.ui.vue'
+import { useMessages } from '@entities/chat/composables/useMessages.composable'
 
-import { useMessages } from './enitities/chat/composables/useMessages.composable'
+import SendMessage from '@features/SendMessage.feature.vue'
+
+import Navbar from '@widgets/Navbar.widget.vue'
 import MessagesList from '@widgets/MessagesList.widget.vue'
+
+import Loader from '@shared/ui/Loader.ui.vue'
 
 const { messages, isLoading, isError, messagesContainer } = useMessages()
 
@@ -39,13 +41,7 @@ const handleMessageSent = (newMessage: string): void => {
 				ref="messagesContainer"
 			>
 				<MessagesList :messages="messages" />
-				<!-- <ul class="messages-list">
-					<Message
-						v-for="(message, index) in messages"
-						:message="message"
-						:index="index"
-					/>
-				</ul> -->
+
 				<div ref="scrollToBottomAnchor"></div>
 			</div>
 

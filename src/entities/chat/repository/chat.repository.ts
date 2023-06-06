@@ -1,6 +1,11 @@
 import axios from 'axios'
 
-import { IChatRepository, IServerResponse, ISuccessResponse, TFailureResponse } from './chat.repository.interface'
+import {
+	IChatRepository,
+	IServerResponse,
+	ISuccessResponse,
+	TFailureResponse
+} from '@entities/chat/repository/chat.repository.interface'
 
 export class ChatRespository implements IChatRepository {
 	#BASE_URL: string = 'https://numia.ru/api'

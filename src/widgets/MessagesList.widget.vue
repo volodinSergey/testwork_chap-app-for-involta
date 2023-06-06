@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { TMessage } from 'src/enitities/chat/repository/chat.repository.interface'
+import { TMessage } from '@entities/chat/repository/chat.repository.interface'
 
-import Message from 'src/enitities/chat/ui/Message.entity.vue';
+import Message from '@entities/chat/ui/Message.entity.vue'
+
 interface IProps {
 	messages: TMessage[]
 }
