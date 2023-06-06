@@ -1,4 +1,4 @@
-import { ISuccessResponse, TFailureResponse } from '../repository/chat.repository.interface'
+import { ISuccessResponse, TFailureResponse } from '@entities/chat/repository/chat.repository.interface'
 
 /**
  * @title Chat service
