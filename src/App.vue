@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { nextTick, ref } from 'vue'
+
 import Navbar from '@widgets/Navbar.widget.vue'
 import SendMessage from '@features/SendMessage.feature.vue'
 import Loader from '@shared/ui/Loader.ui.vue'
 
 import { useMessages } from './enitities/chat/composables/useMessages.composable'
-import { nextTick, ref } from 'vue'
 
 const { messages, isLoading, isError } = useMessages()
 
@@ -29,12 +30,12 @@ const handleMessageSent = (newMessage: string): void => {
 		<div class="chat__messages-container messages-container">
 			<div
 				class="messages-container__top"
-				ref="messagesList"
+				ref="messagesContainer"
 			>
-				<div class="status-panel">Status panel</div>
 				<ul class="messages-list">
 					<div class="error-panel">
 						<Loader v-if="isLoading" />
+
 						<h3 v-else-if="isError">Try later</h3>
 					</div>
 
