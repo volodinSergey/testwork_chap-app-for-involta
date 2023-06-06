@@ -49,13 +49,13 @@ const onSendMessage = () => {
 .input,
 .button {
 	font-size: 1rem;
+	color: #fff;
 }
 
 .input {
 	transition: 0.2s;
 	outline: none;
 	padding-bottom: 5px;
-	color: #fff;
 	border-bottom: 0px solid transparent;
 
 	&::placeholder {

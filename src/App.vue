@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, ref } from 'vue'
+import { ref, nextTick } from 'vue'
 
 import Navbar from '@widgets/Navbar.widget.vue'
 import SendMessage from '@features/SendMessage.feature.vue'
@@ -7,7 +7,7 @@ import Loader from '@shared/ui/Loader.ui.vue'
 
 import { useMessages } from './enitities/chat/composables/useMessages.composable'
 
-const { messages, isLoading, isError } = useMessages()
+const { messages, isLoading, isError, messagesContainer } = useMessages()
 
 const scrollToBottomAnchor = ref<HTMLElement | undefined>()
 
@@ -32,13 +32,12 @@ const handleMessageSent = (newMessage: string): void => {
 				class="messages-container__top"
 				ref="messagesContainer"
 			>
+				<div class="error-panel">
+					<Loader v-if="isLoading" />
+
+					<h3 v-else-if="isError">Something's wrong. Try again</h3>
+				</div>
 				<ul class="messages-list">
-					<div class="error-panel">
-						<Loader v-if="isLoading" />
-
-						<h3 v-else-if="isError">Try later</h3>
-					</div>
-
 					<li
 						class="message"
 						v-for="(message, index) in messages"
@@ -47,9 +46,8 @@ const handleMessageSent = (newMessage: string): void => {
 					>
 						{{ message }}
 					</li>
-
-					<div ref="scrollToBottomAnchor"></div>
 				</ul>
+				<div ref="scrollToBottomAnchor"></div>
 			</div>
 
 			<div class="messages-container__bottom">

@@ -13,7 +13,7 @@ export const useMessages = () => {
 	const isLoading = ref<boolean>(true)
 	const isError = ref<boolean>(false)
 
-	let isMessagesOver = false
+	let isMessagesOver: boolean = false
 	let offset: number = 20
 
 	const fetchMessages = async (offset?: number) => {
@@ -25,7 +25,7 @@ export const useMessages = () => {
 			return false
 		}
 
-		!result.result.length && (isMessagesOver = true)
+		(!result.result.length) && (isMessagesOver = true)
 
 		messages.value = [...result.result.reverse(), ...messages.value]
 
@@ -39,6 +39,8 @@ export const useMessages = () => {
 		isError.value = false
 
 		await sleep(1000)
+
+		if  (isMessagesOver) return
 		
 		const isSuccessFullyFetched = await fetchMessages(offset)
 
@@ -67,12 +69,15 @@ export const useMessages = () => {
 		isLoading.value = false
 
 		messagesContainer.value?.addEventListener('scroll', handleMessagesScroll)
+		console.log(messagesContainer.value)
 	})
 
 	return {
 		messages,
 		isLoading,
 		isError,
-		handleMessagesScroll
+		handleMessagesScroll,
+		fetchMessages,
+		messagesContainer
 	}
 }
