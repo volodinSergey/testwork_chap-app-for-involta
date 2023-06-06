@@ -17,15 +17,18 @@ defineProps<IProps>()
 </template>
 
 <style scoped lang="scss">
+$bgColor-message: #212121;
+$bgColor-myMessage: #930dfd;
 .message {
 	color: #fff;
 	padding: 5px;
 	border-radius: 0.7rem;
-	background-color: rgb(20, 11, 66);
+	background-color: $bgColor-message;
 	width: max-content;
 	max-width: 60%;
 	padding: 0.625rem;
 	animation: message-appear 0.3s linear;
+	overflow-wrap: break-word;
 }
 
 @keyframes message-appear {
@@ -41,6 +44,6 @@ defineProps<IProps>()
 
 .my-message {
 	align-self: flex-end;
-	background-color: #380b0b;
+	background-color: $bgColor-myMessage;
 }
 </style>
