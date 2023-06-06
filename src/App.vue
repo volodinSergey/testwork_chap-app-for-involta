@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Navbar from '@widgets/Navbar.widget.vue'
-
+import SendMessage from '@features/SendMessage.feature.vue'
 import Loader from '@shared/ui/Loader.ui.vue'
 
 import { useMessages } from './enitities/chat/composables/useMessages.composable'
@@ -8,18 +8,13 @@ import { nextTick, ref } from 'vue'
 
 const { messages, isLoading, isError } = useMessages()
 
-const newMessage = ref<string>('')
+const scrollToBottomAnchor = ref<HTMLElement | undefined>()
 
-const view = ref<HTMLElement | undefined>()
-
-const onSendMessage = () => {
-	if (!newMessage.value.length) return
-
-	messages.value.push(newMessage.value)
-	newMessage.value = ''
+const handleMessageSent = (newMessage: string): void => {
+	messages.value = [...messages.value, newMessage]
 
 	nextTick(() => {
-		view.value?.scrollIntoView({
+		scrollToBottomAnchor.value?.scrollIntoView({
 			block: 'end',
 			behavior: 'smooth'
 		})
@@ -51,22 +46,13 @@ const onSendMessage = () => {
 					>
 						{{ message }}
 					</li>
-					<div ref="view"></div>
+
+					<div ref="scrollToBottomAnchor"></div>
 				</ul>
 			</div>
 
 			<div class="messages-container__bottom">
-				<form
-					class="add-message-form"
-					@submit.prevent="onSendMessage"
-				>
-					<input
-						type="text"
-						v-model="newMessage"
-						placeholder="Напишите сообщение"
-					/>
-					<button type="submit">Send</button>
-				</form>
+				<SendMessage @message-sent="handleMessageSent" />
 			</div>
 		</div>
 	</div>
@@ -155,21 +141,5 @@ const onSendMessage = () => {
 .my-message {
 	align-self: flex-end;
 	background-color: #380b0b;
-}
-
-.add-message-form {
-	display: grid;
-	grid-template-columns: 1fr max-content;
-	border: 1px solid black;
-	padding: 0.625rem;
-	border-radius: 0.625rem;
-}
-
-.status-panel {
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: red;
-	padding: 10px;
 }
 </style>
