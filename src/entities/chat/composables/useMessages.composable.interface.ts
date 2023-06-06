@@ -14,13 +14,13 @@ export interface IUseMessagesComposable {
 	messages: Ref<TMessage[]>
 
 	/**
-	 * @title Is loading state
+	 * @title IsLoading state
 	 * @description When messages are fetching
 	 */
 	isLoading: Ref<boolean>
 
 	/**
-	 * @title Is error state
+	 * @title IsRrror state
 	 * @description When we get error response from server
 	 */
 	isError: Ref<boolean>

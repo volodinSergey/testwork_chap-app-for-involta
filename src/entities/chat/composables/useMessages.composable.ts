@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 import { sleep } from '@shared/utils/sleep.util'
 
@@ -14,7 +14,9 @@ export const useMessages = (): IUseMessagesComposable => {
 	const isLoading = ref<boolean>(true)
 	const isError = ref<boolean>(false)
 
+	/* Will be true when we will get empty array from server. It will mean that messages are over */
 	let areMessagesOver: boolean = false
+
 	let offset: number = 20
 
 	const fetchMessages = async (offset?: number) => {
@@ -77,6 +79,8 @@ export const useMessages = (): IUseMessagesComposable => {
 
 		messagesContainer.value?.addEventListener('scroll', handleMessagesScroll)
 	})
+
+	onUnmounted(() => messagesContainer.value?.removeEventListener('scroll', handleMessagesScroll))
 
 	return {
 		messages,
