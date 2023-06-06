@@ -42,8 +42,12 @@ export const useMessages = () => {
 
 		await sleep(1000)
 
-		if  (isMessagesOver) return
-		
+		if (areMessagesOver) {
+			isLoading.value = false
+
+			return
+		}
+
 		const isSuccessFullyFetched = await fetchMessages(offset)
 
 		isLoading.value = false
@@ -78,8 +82,6 @@ export const useMessages = () => {
 		messages,
 		isLoading,
 		isError,
-		handleMessagesScroll,
-		fetchMessages,
 		messagesContainer
 	}
 }
