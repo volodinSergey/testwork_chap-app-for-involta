@@ -4,6 +4,7 @@ import { ref, nextTick } from 'vue'
 import Navbar from '@widgets/Navbar.widget.vue'
 import SendMessage from '@features/SendMessage.feature.vue'
 import Loader from '@shared/ui/Loader.ui.vue'
+import Message from './enitities/chat/ui/Message.entity.vue'
 
 import { useMessages } from './enitities/chat/composables/useMessages.composable'
 
@@ -38,14 +39,11 @@ const handleMessageSent = (newMessage: string): void => {
 				ref="messagesContainer"
 			>
 				<ul class="messages-list">
-					<li
-						class="message"
+					<Message
 						v-for="(message, index) in messages"
-						:key="index"
-						:class="{ 'my-message': index % 2 === 0 }"
-					>
-						{{ message }}
-					</li>
+						:message="message"
+						:index="index"
+					/>
 				</ul>
 				<div ref="scrollToBottomAnchor"></div>
 			</div>
@@ -115,36 +113,5 @@ const handleMessageSent = (newMessage: string): void => {
 	display: flex;
 	flex-direction: column;
 	padding: 1.9375rem 0.625rem;
-}
-
-.message {
-	color: #fff;
-	padding: 5px;
-	border-radius: 0.7rem;
-	background-color: rgb(20, 11, 66);
-	width: max-content;
-	max-width: 60%;
-	padding: 0.625rem;
-	animation: message-appear 0.3s linear;
-}
-
-@keyframes message-appear {
-	from {
-		transform: translateY(-10px);
-		opacity: 0;
-	}
-	to {
-		transform: translateY(0);
-		opacity: 1;
-	}
-}
-
-.my-message {
-	align-self: flex-end;
-	background-color: #380b0b;
-}
-
-.error-panel {
-	min-height: 1.875rem;
 }
 </style>
