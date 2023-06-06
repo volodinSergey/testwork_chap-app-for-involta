@@ -1,5 +1,5 @@
 <template>
-	<div class="navbar">Havbar here</div>
+	<div class="navbar">Navbar content can be here ...</div>
 </template>
 
 <style scoped lang="scss">
