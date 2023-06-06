@@ -5,7 +5,9 @@ import { sleep } from '@shared/utils/sleep.util'
 import { chatService } from '@entities/chat/service/chat.service'
 import { TMessage } from '@entities/chat/repository/chat.repository.interface'
 
-export const useMessages = () => {
+import { IUseMessagesComposable } from '@entities/chat/composables/useMessages.composable.interface'
+
+export const useMessages = (): IUseMessagesComposable => {
 	const messagesContainer = ref<HTMLElement | undefined>()
 
 	const messages = ref<TMessage[]>([])
