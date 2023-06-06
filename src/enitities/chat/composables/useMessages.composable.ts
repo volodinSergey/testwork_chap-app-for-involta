@@ -13,19 +13,21 @@ export const useMessages = () => {
 	const isLoading = ref<boolean>(true)
 	const isError = ref<boolean>(false)
 
-	let isMessagesOver: boolean = false
+	let areMessagesOver: boolean = false
 	let offset: number = 20
 
 	const fetchMessages = async (offset?: number) => {
 		const result = await chatService.getMessages(offset)
 
+		/* If we get error (Oops, try again) from server*/
 		if (typeof result === 'string') {
 			isError.value = true
 
 			return false
 		}
 
-		(!result.result.length) && (isMessagesOver = true)
+		/* If we get empty array from server , it means that messages are over*/
+		!result.result.length && (areMessagesOver = true)
 
 		messages.value = [...result.result.reverse(), ...messages.value]
 
