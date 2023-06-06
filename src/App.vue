@@ -103,6 +103,7 @@ const handleMessageSent = (newMessage: string): void => {
 	@media (max-width: 57.8125rem) {
 		position: sticky;
 		bottom: 0;
+		z-index: 10;
 	}
 }
 </style>
