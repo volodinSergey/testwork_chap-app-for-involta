@@ -57,14 +57,9 @@ const onSendMessage = () => {
 	transition: 0.2s;
 	outline: none;
 	padding-bottom: 5px;
-	border-bottom: 0px solid transparent;
 
 	&::placeholder {
 		color: inherit;
-	}
-
-	&:focus {
-		border-bottom: 1px solid #fff;
 	}
 }
 </style>
