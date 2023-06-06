@@ -7,7 +7,7 @@ export interface IChatRepository {
 	 * @title Method [ getMessages ]
 	 * @description Allows to get messages from api
 	 * @param offset Allows to setup offset
-	 * @returns Either messages array (<ISuccessResponse) or server error message (TFailureResponse)
+	 * @returns Either messages array (ISuccessResponse) or server error message (TFailureResponse)
 	 */
 	getMessages: (offset?: number) => Promise<ISuccessResponse | TFailureResponse>
 }
