@@ -20,4 +20,10 @@ defineProps<IProps>()
 	</ul>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.messages-list {
+	display: flex;
+	flex-direction: column;
+	padding: 1.9375rem 0.625rem;
+}
+</style>

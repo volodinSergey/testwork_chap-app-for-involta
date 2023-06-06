@@ -105,10 +105,4 @@ const handleMessageSent = (newMessage: string): void => {
 		bottom: 0;
 	}
 }
-
-.messages-list {
-	display: flex;
-	flex-direction: column;
-	padding: 1.9375rem 0.625rem;
-}
 </style>
