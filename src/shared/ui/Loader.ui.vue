@@ -8,10 +8,10 @@
 	width: 3.5rem;
 	aspect-ratio: 1;
 	font-size: 1.875rem;
-	border: 10px solid black;
+	border: 0.5rem solid black;
 	border-radius: 50%;
 	border-top-color: red;
-	animation: loading infinite .5s linear;
+	animation: loading infinite .3s linear;
 
 	@keyframes loading {
 		100% {

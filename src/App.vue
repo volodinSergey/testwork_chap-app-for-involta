@@ -1,22 +1,29 @@
 <script setup lang="ts">
 import Navbar from '@widgets/Navbar.widget.vue'
+
 import Loader from '@shared/ui/Loader.ui.vue'
 
 import { useMessages } from './enitities/chat/composables/useMessages.composable'
-import { ref } from 'vue'
-const { messages, isLoading, failResponse, isFailResponseExists, fetchMessages } = useMessages()
+import { nextTick, ref } from 'vue'
 
-const messagesList = ref<HTMLElement | undefined>()
+const { messages, isLoading, isError } = useMessages()
 
-let offset = 20
+const newMessage = ref<string>('')
 
-const handleScroll = async () => {
-	if (messagesList.value && messagesList.value.scrollTop === 0) {
-			await fetchMessages(offset)
+const view = ref<HTMLElement | undefined>()
 
-			offset += 20
-	
-	}
+const onSendMessage = () => {
+	if (!newMessage.value.length) return
+
+	messages.value.push(newMessage.value)
+	newMessage.value = ''
+
+	nextTick(() => {
+		view.value?.scrollIntoView({
+			block: 'end',
+			behavior: 'smooth'
+		})
+	})
 }
 </script>
 
@@ -28,17 +35,13 @@ const handleScroll = async () => {
 			<div
 				class="messages-container__top"
 				ref="messagesList"
-				@scroll="handleScroll"
 			>
-				<h1
-					class="fail"
-					v-if="isFailResponseExists"
-				>
-					{{ failResponse }}
-				</h1>
-
+				<div class="status-panel">Status panel</div>
 				<ul class="messages-list">
-					<Loader v-if="isLoading" />
+					<div class="error-panel">
+						<Loader v-if="isLoading" />
+						<h3 v-else-if="isError">Try later</h3>
+					</div>
 
 					<li
 						class="message"
@@ -48,16 +51,18 @@ const handleScroll = async () => {
 					>
 						{{ message }}
 					</li>
+					<div ref="view"></div>
 				</ul>
 			</div>
 
 			<div class="messages-container__bottom">
 				<form
 					class="add-message-form"
-					@submit.prevent=""
+					@submit.prevent="onSendMessage"
 				>
 					<input
 						type="text"
+						v-model="newMessage"
 						placeholder="Напишите сообщение"
 					/>
 					<button type="submit">Send</button>
@@ -106,6 +111,7 @@ const handleScroll = async () => {
 }
 
 .messages-container__top {
+	position: relative;
 	overflow: auto;
 }
 
@@ -119,8 +125,8 @@ const handleScroll = async () => {
 }
 
 .messages-list {
-	display: grid;
-	gap: 0.625rem;
+	display: flex;
+	flex-direction: column;
 	padding: 1.9375rem 0.625rem;
 }
 
@@ -129,16 +135,25 @@ const handleScroll = async () => {
 	padding: 5px;
 	border-radius: 0.7rem;
 	background-color: rgb(20, 11, 66);
-	min-width: min-content;
+	width: max-content;
 	max-width: 60%;
 	padding: 0.625rem;
+	animation: message-appear 0.3s linear;
 }
 
-@keyframes message-animation {
+@keyframes message-appear {
+	from {
+		transform: translateY(-10px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 
 .my-message {
-	justify-self: end;
+	align-self: flex-end;
 	background-color: #380b0b;
 }
 
@@ -148,5 +163,13 @@ const handleScroll = async () => {
 	border: 1px solid black;
 	padding: 0.625rem;
 	border-radius: 0.625rem;
+}
+
+.status-panel {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: red;
+	padding: 10px;
 }
 </style>
