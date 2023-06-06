@@ -97,9 +97,6 @@ const handleMessageSent = (newMessage: string): void => {
 }
 
 .messages-container__bottom {
-	padding: 1rem 1rem 0 1rem;
-	border-top: 0.0625rem solid #fff;
-
 	@media (max-width: 57.8125rem) {
 		position: sticky;
 		bottom: 0;

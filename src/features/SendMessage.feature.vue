@@ -41,9 +41,10 @@ const onSendMessage = () => {
 	display: grid;
 	grid-template-columns: 1fr max-content;
 	gap: 0.625rem;
-	padding: 0.625rem;
+	padding: 1rem;
 	border-radius: 0.625rem;
 	font-size: 1rem;
+	background-color: #444;
 }
 
 .input,
