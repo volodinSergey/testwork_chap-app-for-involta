@@ -4,9 +4,9 @@ import { ref, nextTick } from 'vue'
 import Navbar from '@widgets/Navbar.widget.vue'
 import SendMessage from '@features/SendMessage.feature.vue'
 import Loader from '@shared/ui/Loader.ui.vue'
-import Message from './enitities/chat/ui/Message.entity.vue'
 
 import { useMessages } from './enitities/chat/composables/useMessages.composable'
+import MessagesList from '@widgets/MessagesList.widget.vue'
 
 const { messages, isLoading, isError, messagesContainer } = useMessages()
 
@@ -38,13 +38,14 @@ const handleMessageSent = (newMessage: string): void => {
 				class="messages-container__top"
 				ref="messagesContainer"
 			>
-				<ul class="messages-list">
+				<MessagesList :messages="messages" />
+				<!-- <ul class="messages-list">
 					<Message
 						v-for="(message, index) in messages"
 						:message="message"
 						:index="index"
 					/>
-				</ul>
+				</ul> -->
 				<div ref="scrollToBottomAnchor"></div>
 			</div>
 
