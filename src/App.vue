@@ -28,15 +28,15 @@ const handleMessageSent = (newMessage: string): void => {
 		<Navbar />
 
 		<div class="chat__messages-container messages-container">
+			<div class="loading-status-panel">
+				<Loader v-if="isLoading" />
+
+				<h3 v-else-if="isError">Something's wrong. Try again</h3>
+			</div>
 			<div
 				class="messages-container__top"
 				ref="messagesContainer"
 			>
-				<div class="error-panel">
-					<Loader v-if="isLoading" />
-
-					<h3 v-else-if="isError">Something's wrong. Try again</h3>
-				</div>
 				<ul class="messages-list">
 					<li
 						class="message"
@@ -84,6 +84,7 @@ const handleMessageSent = (newMessage: string): void => {
 	}
 }
 
+.loading-status-panel,
 .messages-container__top,
 .messages-container__bottom {
 	margin: 0 auto;
@@ -102,6 +103,7 @@ const handleMessageSent = (newMessage: string): void => {
 
 .messages-container__bottom {
 	padding: 1rem 1rem 0 1rem;
+	border-top: 0.0625rem solid #fff;
 
 	@media (max-width: 57.8125rem) {
 		position: sticky;
@@ -140,5 +142,9 @@ const handleMessageSent = (newMessage: string): void => {
 .my-message {
 	align-self: flex-end;
 	background-color: #380b0b;
+}
+
+.error-panel {
+	min-height: 1.875rem;
 }
 </style>
