@@ -20,7 +20,7 @@ export interface IUseMessagesComposable {
 	isLoading: Ref<boolean>
 
 	/**
-	 * @title IsRrror state
+	 * @title IsЕrror state
 	 * @description When we get error response from server
 	 */
 	isError: Ref<boolean>
