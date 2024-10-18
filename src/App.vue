@@ -1,12 +1,13 @@
 <template>
 	<div id="app">
+		<h1>Cчётчик: {{ count }}</h1>
 	  <div
 		class="circle"
 		@click="handleClick"
 	  ></div>
 	  <transition name="fade" mode="out-in">
 		<div v-if="scoreVisible" class="score" :style="{ top: scorePosition.y + 'px', left: scorePosition.x + 'px' }">
-		  Спотачь !
+		  Спотачь !  +1
 		</div>
 	  </transition>
 	</div>
@@ -16,6 +17,7 @@
   export default {
 	data() {
 	  return {
+		count: 0,
 		scoreVisible: false,
 		circlePosition: { x: 0, y: 0 },
 		scorePosition: { x: 0, y: 0 },
@@ -28,6 +30,7 @@
 		return { x, y };
 	  },
 	  handleClick() {
+		this.count += 1
 		this.scoreVisible = true;
   
 		// Устанавливаем позицию для анимации
@@ -50,25 +53,40 @@
   </script>
   
   <style>
+  * {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	color: #fff;
+  }
+
+
   #app {
 	position: relative;
 	height: 100vh;
 	overflow: hidden;
+	background: #444;
+	margin: 0;
+	padding: 0;
   }
   
   .circle {
 	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	width: 100px;
 	height: 100px;
 	background-color: black;
 	border-radius: 50%;
 	cursor: pointer;
+	
   }
   
   .score {
+	color: #fff;
 	position: absolute;
-	font-size: 32px;
-	color: red;
+	font-size: 16px;
 	transition: opacity 0.5s ease;
   }
   
