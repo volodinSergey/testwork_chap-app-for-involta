@@ -158,6 +158,7 @@ const keyUpHandler = (event: KeyboardEvent) => {
 };
 
 onMounted(() => {
+    //@ts-ignore
   ctx.value = canvas.value?.getContext('2d');
   
   document.addEventListener('keydown', keyDownHandler);
