@@ -1,12 +1,17 @@
 
 <template>
   <div class="game-container">
-    <canvas class="canvas"  ref="canvas" width="480" height="800"></canvas>
+    <canvas class="canvas"  ref="canvas" width="480" height="600"></canvas>
     <div class="score">Score: {{ score }}</div>
 
     <div class="controls-box">
-        <button class="controls-box__control" @touchstart="onMovePaddleLeft" @touchend="onEndMovePaddleLeft">left</button>
-        <button class="controls-box__control" @touchstart="onMovePaddleRight" @touchend="onEndMovePaddleRight">right</button>
+        <button class="controls-box__control"
+         @mousedown="onMovePaddleLeft"
+          @mouseup="onEndMovePaddleLeft"
+           @touchstart="onMovePaddleLeft" 
+           @touchend="onEndMovePaddleLeft">left</button>
+        <button class="controls-box__control" @touchstart="onMovePaddleRight" @touchend="onEndMovePaddleRight"          @mousedown="onMovePaddleRight"
+        @mouseup="onEndMovePaddleRight">right</button>
     </div>
 
   </div>
@@ -67,7 +72,7 @@ const drawBall = () => {
 const drawPaddle = () => {
   if (ctx.value) {
     ctx.value.beginPath();
-ctx.value.rect(paddleX, 600, paddleWidth, paddleHeight);
+ctx.value.rect(paddleX, 500, paddleWidth, paddleHeight);
     ctx.value.fillStyle = '#0095DD';
     ctx.value.fill();
     ctx.value.closePath();
@@ -180,7 +185,7 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   width: 480px;
-  height: 800px;
+  height: 600px;
   background-color: rgb(69, 42, 165);
 }
 .score {
