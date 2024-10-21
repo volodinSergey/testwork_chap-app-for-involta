@@ -56,6 +56,8 @@ Right
   const brickPadding = 5;
   const brickOffsetTop = 30;
   const brickOffsetLeft = 30;
+
+  //@ts-ignore
   let interval
   
   for (let c = 0; c < brickColumnCount; c += 1) {
@@ -148,6 +150,7 @@ const onEndMovePaddleRight = () => rightPressed = false
         } else {
 
         isGameOver.value = true
+        //@ts-ignore
         clearInterval(interval)
         }
       }
@@ -198,6 +201,7 @@ isGameOver.value = false
      interval = setInterval(draw, 10);
   
     onBeforeUnmount(() => {
+        //@ts-ignore
       clearInterval(interval);
       document.removeEventListener('keydown', keyDownHandler);
       document.removeEventListener('keyup', keyUpHandler);
@@ -243,6 +247,8 @@ isGameOver.value = false
   .controls__control {
     flex-grow: 1;
     color: #000;
+    padding: 8px;
+    border: none;
   }
 
   .play-again-button {
