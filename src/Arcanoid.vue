@@ -201,6 +201,7 @@ isGameOver.value = false
      interval = setInterval(draw, 10);
   
     onBeforeUnmount(() => {
+        //@ts-ignore
       clearInterval(interval);
       document.removeEventListener('keydown', keyDownHandler);
       document.removeEventListener('keyup', keyUpHandler);
