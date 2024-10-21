@@ -56,6 +56,8 @@ Right
   const brickPadding = 5;
   const brickOffsetTop = 30;
   const brickOffsetLeft = 30;
+
+  //@ts-ignore
   let interval
   
   for (let c = 0; c < brickColumnCount; c += 1) {
@@ -148,6 +150,7 @@ const onEndMovePaddleRight = () => rightPressed = false
         } else {
 
         isGameOver.value = true
+        //@ts-ignore
         clearInterval(interval)
         }
       }
