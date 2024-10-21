@@ -1,56 +1,14 @@
+<script setup lang="ts">
+import Arcanoid from './Arcanoid.vue';
+</script>
+
+
+
+
 <template>
-	<div id="app">
-		<h1>Cчётчик: {{ count }}</h1>
-	  <div
-		class="circle"
-		@click="handleClick"
-	  ></div>
-	  <transition name="fade" mode="out-in">
-		<div v-if="scoreVisible" class="score" :style="{ top: scorePosition.y + 'px', left: scorePosition.x + 'px' }">
-		  Спотачь !  +1
-		</div>
-	  </transition>
-	</div>
+<Arcanoid />
   </template>
   
-  <script>
-  export default {
-	data() {
-	  return {
-		count: 0,
-		scoreVisible: false,
-		circlePosition: { x: 0, y: 0 },
-		scorePosition: { x: 0, y: 0 },
-	  };
-	},
-	methods: {
-	  randomPosition() {
-		const x = Math.random() * (window.innerWidth - 50);
-		const y = Math.random() * (window.innerHeight - 50);
-		return { x, y };
-	  },
-	  handleClick() {
-		this.count += 1
-		this.scoreVisible = true;
-  
-		// Устанавливаем позицию для анимации
-		this.scorePosition = this.randomPosition();
-  
-		// Перемещаем круг в новое случайное место
-		this.circlePosition = this.randomPosition();
-  
-		// Скрываем счет через 1 секунду
-		setTimeout(() => {
-		  this.scoreVisible = false;
-		}, 1000);
-	  },
-	},
-	mounted() {
-	  // Устанавливаем начальную позицию круга
-	  this.circlePosition = this.randomPosition();
-	},
-  };
-  </script>
   
   <style>
   * {
