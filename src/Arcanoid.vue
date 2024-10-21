@@ -243,6 +243,8 @@ isGameOver.value = false
   .controls__control {
     flex-grow: 1;
     color: #000;
+    padding: 8px;
+    border: none;
   }
 
   .play-again-button {
